@@ -7,32 +7,33 @@ import {
   Text,
   View,
   Alert,
+  TouchableOpacity,
 } from "react-native";
 
 export default function App() {
-  // 화살표 함수 형식으로 함수 정의하고, JSX 문법 안에서 사용하기
   const customAlert = () => {
-    Alert.alert("JSX 밖에서 함수 구현 가능!");
+    Alert.alert("TouchableOpacity 에도 onPress 속성 존재");
   };
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.textContainer}>
+      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
         <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-        <Button
-          style={styles.buttonStyle}
-          title="버튼을 눌러주세요"
-          color="#f194ff"
-          onPress={customAlert}
-        />
-        <Button
-          style={styles.buttonStyle}
-          title="버튼을 눌러주세요"
-          color="#ff0000"
-          onPress={() => {
-            customAlert();
-          }}
-        />
-      </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
+        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
+        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
+        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
+        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
+        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
