@@ -42,21 +42,8 @@ export default function App() {
       </ScrollView>
       <View style={styles.cardContainer}>
         {tip.map((content, i) => {
-          return i % 2 == 0 ? (
-            <View style={styles.cardEven} key={i}>
-              <Image style={styles.cardImage} source={{ uri: content.image }} />
-              <View style={styles.cardText}>
-                <Text style={styles.cardTitle} numberOfLines={1}>
-                  {content.title}
-                </Text>
-                <Text style={styles.cardDesc} numberOfLines={3}>
-                  {content.desc}
-                </Text>
-                <Text style={styles.cardDate}>{content.date}</Text>
-              </View>
-            </View>
-          ) : (
-            <View style={styles.cardOdd} key={i}>
+          return (
+            <View style={styles.card} key={i}>
               <Image style={styles.cardImage} source={{ uri: content.image }} />
               <View style={styles.cardText}>
                 <Text style={styles.cardTitle} numberOfLines={1}>
@@ -172,23 +159,5 @@ const styles = StyleSheet.create({
   cardDate: {
     fontSize: 10,
     color: "#A6A6A6",
-  },
-  cardEven: {
-    flex: 1,
-    flexDirection: "row",
-    margin: 10,
-    backgroundColor: "#FFFED7",
-    borderRadius: 20,
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#eee",
-    paddingBottom: 10,
-  },
-  cardOdd: {
-    flex: 1,
-    flexDirection: "row",
-    margin: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#eee",
-    paddingBottom: 10,
   },
 });
