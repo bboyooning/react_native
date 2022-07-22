@@ -8,33 +8,19 @@ import {
   View,
   Alert,
   TouchableOpacity,
+  Image,
 } from "react-native";
+import favicon from "./assets/favicon.png";
 
 export default function App() {
-  const customAlert = () => {
-    Alert.alert("TouchableOpacity 에도 onPress 속성 존재");
-  };
   return (
-    <ScrollView style={styles.container}>
-      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.textContainer} onPress={customAlert}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </TouchableOpacity>
-    </ScrollView>
+    <View style={styles.container}>
+      <Image
+        source={{ uri: "https://avatars.githubusercontent.com/u/77096364?v=4" }}
+        resizeMode={"cover"}
+        style={styles.imageStyle}
+      />
+    </View>
   );
 }
 
@@ -42,6 +28,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  imageStyle: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   textContainer: {
     height: 100,
