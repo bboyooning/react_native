@@ -1,48 +1,27 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+} from "react-native";
 
 export default function App() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>안녕하세요, 보윤이에요!</Text>
+        <Button
+          style={styles.buttonStyle}
+          title="버튼을 눌러주세요"
+          color="#f194ff"
+          onPress={() => {
+            Alert.alert("팝업 알람입니다!!");
+          }}
+        />
       </View>
     </ScrollView>
   );
@@ -58,7 +37,7 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     borderWidth: 1,
     borderRadius: 10,
-    margin: 10,
+    margin: 50,
   },
   textStyle: {
     textAlign: "center",
