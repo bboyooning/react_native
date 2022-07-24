@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,12 +7,17 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import Card from "../Components/Card";
 import data from "../data.json";
 
 const main =
   "https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2Fmain.png?alt=media&token=8e5eb78d-19ee-4359-9209-347d125b322c";
 export default function MainPage() {
-  let tip = data.tip;
+  const [state, setState] = useState([]);
+  useEffect(() => {
+    setState(data);
+  }, []);
+  let tip = state.tip;
   let todayWeather = 10 + 17;
   let todayCondition = "흐림";
   return (
@@ -42,20 +47,7 @@ export default function MainPage() {
       </ScrollView>
       <View style={styles.cardContainer}>
         {tip.map((content, i) => {
-          return (
-            <View style={styles.card} key={i}>
-              <Image style={styles.cardImage} source={{ uri: content.image }} />
-              <View style={styles.cardText}>
-                <Text style={styles.cardTitle} numberOfLines={1}>
-                  {content.title}
-                </Text>
-                <Text style={styles.cardDesc} numberOfLines={3}>
-                  {content.desc}
-                </Text>
-                <Text style={styles.cardDate}>{content.date}</Text>
-              </View>
-            </View>
-          );
+          return <Card content={content} key={i} />;
         })}
       </View>
     </ScrollView>
