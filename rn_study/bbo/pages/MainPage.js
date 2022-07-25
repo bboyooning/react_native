@@ -15,13 +15,16 @@ import Card from "../components/Card";
 import Loading from "../components/Loading";
 import { StatusBar } from "expo-status-bar";
 
-export default function MainPage() {
+export default function MainPage({ navigation, route }) {
   const [state, setState] = useState([]);
   const [categoryState, setCategoryState] = useState([]);
   const [ready, setReady] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
+      navigation.setOptions({
+        title: "보윤이의 꿀팁",
+      });
       setState(data.tip);
       setCategoryState(data.tip);
       setReady(false);
@@ -100,7 +103,7 @@ export default function MainPage() {
       </ScrollView>
       <View style={styles.cardContainer}>
         {categoryState.map((content, i) => {
-          return <Card content={content} key={i} />;
+          return <Card content={content} key={i} navigation={navigation} />;
         })}
       </View>
     </ScrollView>
