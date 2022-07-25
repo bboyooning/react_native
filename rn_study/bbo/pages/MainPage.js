@@ -7,24 +7,34 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Card from "../Components/Card";
-import data from "../data.json";
 
 const main =
   "https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2Fmain.png?alt=media&token=8e5eb78d-19ee-4359-9209-347d125b322c";
+import data from "../data.json";
+import Card from "../components/Card";
+import Loading from "../components/Loading";
+
 export default function MainPage() {
   const [state, setState] = useState([]);
+  const [ready, setReady] = useState(true);
+
   useEffect(() => {
-    setState(data);
+    setTimeout(() => {
+      setState(data);
+      setReady(false);
+    }, 1000);
   }, []);
+
   let tip = state.tip;
   let todayWeather = 10 + 17;
   let todayCondition = "흐림";
-  return (
+  return ready ? (
+    <Loading />
+  ) : (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>보윤이의 꿀팁</Text>
       <Text style={styles.weather}>
-        오늘의 날씨: {todayWeather + "도 " + todayCondition}
+        오늘의 날씨: {todayWeather + "°C " + todayCondition}
       </Text>
       <Image style={styles.mainImage} source={{ uri: main }} />
       <ScrollView
