@@ -47,7 +47,7 @@ export default function MainPage() {
   ) : (
     <ScrollView style={styles.container}>
       <StatusBar style="light" />
-      <Text style={styles.title}>보윤이의 꿀팁</Text>
+      {/* <Text style={styles.title}>보윤이의 꿀팁</Text> */}
       <Text style={styles.weather}>
         오늘의 날씨: {todayWeather + "°C " + todayCondition}
       </Text>

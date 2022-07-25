@@ -11,12 +11,13 @@ const StackNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "black",
-          borderBottomColor: "black",
-          shadowColor: "black",
+          backgroundColor: "white",
+          borderBottomColor: "white",
+          shadowColor: "white",
           height: 100,
         },
-        headerTintColor: "#FFFFFF",
+        headerTitleAlign: "left",
+        headerTintColor: "#000",
         headerBackTitleVisible: false,
       }}
     >
