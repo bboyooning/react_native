@@ -9,23 +9,36 @@ import {
 } from "react-native";
 
 const main =
-  "https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2Fmain.png?alt=media&token=8e5eb78d-19ee-4359-9209-347d125b322c";
+  "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";
 import data from "../data.json";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
 
 export default function MainPage() {
   const [state, setState] = useState([]);
+  const [categoryState, setCategoryState] = useState([]);
   const [ready, setReady] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
-      setState(data);
+      setState(data.tip);
+      setCategoryState(data.tip);
       setReady(false);
     }, 1000);
   }, []);
 
-  let tip = state.tip;
+  const category = (cate) => {
+    if (cate == "전체보기") {
+      setCategoryState(state);
+    } else {
+      setCategoryState(
+        state.filter((data) => {
+          return data.category == cate;
+        })
+      );
+    }
+  };
+
   let todayWeather = 10 + 17;
   let todayCondition = "흐림";
   return ready ? (
@@ -42,21 +55,49 @@ export default function MainPage() {
         horizontal
         indicatorStyle={"white"}
       >
-        <TouchableOpacity style={styles.middleButton01}>
+        <TouchableOpacity
+          style={styles.middleButtonAll}
+          onPress={() => {
+            category("전체보기");
+          }}
+        >
+          <Text style={styles.middleButtonTextAll}>전체보기</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.middleButton01}
+          onPress={() => {
+            category("생활");
+          }}
+        >
           <Text style={styles.middleButtonText}>생활</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.middleButton02}>
+        <TouchableOpacity
+          style={styles.middleButton02}
+          onPress={() => {
+            category("재테크");
+          }}
+        >
           <Text style={styles.middleButtonText}>재테크</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.middleButton03}>
+        <TouchableOpacity
+          style={styles.middleButton03}
+          onPress={() => {
+            category("반려견");
+          }}
+        >
           <Text style={styles.middleButtonText}>반려견</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.middleButton04}>
+        <TouchableOpacity
+          style={styles.middleButton04}
+          onPress={() => {
+            category("꿀팁 찜");
+          }}
+        >
           <Text style={styles.middleButtonText}>꿀팁 찜</Text>
         </TouchableOpacity>
       </ScrollView>
       <View style={styles.cardContainer}>
-        {tip.map((content, i) => {
+        {categoryState.map((content, i) => {
           return <Card content={content} key={i} />;
         })}
       </View>
@@ -89,6 +130,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 10,
     height: 60,
+  },
+  middleButtonAll: {
+    width: 100,
+    height: 50,
+    padding: 15,
+    backgroundColor: "#20b2aa",
+    borderColor: "deeppink",
+    borderRadius: 15,
+    margin: 7,
   },
   middleButton01: {
     width: 100,
@@ -123,6 +173,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 7,
   },
+  middleButtonTextAll: {
+    color: "#fff",
+    fontWeight: "700",
+    textAlign: "center",
+  },
   middleButtonText: {
     color: "#fff",
     fontWeight: "700",
@@ -131,35 +186,5 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginTop: 10,
     marginLeft: 10,
-  },
-  card: {
-    flex: 1,
-    flexDirection: "row",
-    margin: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#eee",
-    paddingBottom: 10,
-  },
-  cardImage: {
-    flex: 1,
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-  },
-  cardText: {
-    flex: 2,
-    flexDirection: "column",
-    marginLeft: 10,
-  },
-  cardTitle: {
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  cardDesc: {
-    fontSize: 15,
-  },
-  cardDate: {
-    fontSize: 10,
-    color: "#A6A6A6",
   },
 });
