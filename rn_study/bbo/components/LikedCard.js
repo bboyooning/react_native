@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function Card({ content, navigation }) {
   return (
@@ -13,6 +13,14 @@ export default function Card({ content, navigation }) {
           {content.desc}
         </Text>
         <Text style={styles.cardDate}>{content.date}</Text>
+        <View style={styles.bottomButtons}>
+          <TouchableOpacity style={styles.button} onPress={() => detail()}>
+            <Text style={styles.buttonText}>자세히보기</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => remove()}>
+            <Text style={styles.buttonText}>찜 해제</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -48,5 +56,24 @@ const styles = StyleSheet.create({
   cardDate: {
     fontSize: 10,
     color: "#A6A6A6",
+  },
+  bottomButtons: {
+    flexDirection: "row",
+  },
+  button: {
+    display: "flex",
+    justifyContent: "space-around",
+    width: 100,
+    marginTop: 20,
+    marginRight: 10,
+    marginLeft: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "deeppink",
+    borderRadius: 7,
+  },
+  buttonText: {
+    color: "deeppink",
+    textAlign: "center",
   },
 });
