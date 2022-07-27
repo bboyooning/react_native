@@ -1,7 +1,11 @@
 import React from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function Card({ content, navigation }) {
+export default function Card({ content, navigation, tip, setTip }) {
+  const detail = () => {
+    navigation.navigate("DetailPage", { idx: content.idx });
+  };
+
   return (
     <View style={styles.card}>
       <Image style={styles.cardImage} source={{ uri: content.image }} />
@@ -15,7 +19,7 @@ export default function Card({ content, navigation }) {
         <Text style={styles.cardDate}>{content.date}</Text>
         <View style={styles.bottomButtons}>
           <TouchableOpacity style={styles.button} onPress={() => detail()}>
-            <Text style={styles.buttonText}>자세히보기</Text>
+            <Text style={styles.buttonText}>자세히 보기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => remove()}>
             <Text style={styles.buttonText}>찜 해제</Text>
