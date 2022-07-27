@@ -8,9 +8,12 @@ import {
   TouchableOpacity,
   Alert,
   Share,
+  Platform,
 } from "react-native";
-
 import * as Linking from "expo-linking";
+import { firebase_db } from "../firebaseConfig";
+import * as Application from "expo-application";
+const isIOS = Platform.OS === "ios";
 
 export default function DetailPage({ navigation, route }) {
   const [tip, setTip] = useState({
@@ -32,11 +35,33 @@ export default function DetailPage({ navigation, route }) {
       },
       headerTintColor: "#fff",
     });
-    setTip(route.params);
+
+    const { idx } = route.params;
+    firebase_db
+      .ref("/tip/" + idx)
+      .once("value")
+      .then((snapshot) => {
+        let tip = snapshot.val();
+        setTip(tip);
+      });
   }, []);
 
-  const popup = () => {
-    Alert.alert("꿀팁 찜!");
+  const like = async () => {
+    let userUniqueId;
+    if (isIOS) {
+      let iosId = await Application.getIosIdForVendorAsync();
+      userUniqueId = iosId;
+    } else {
+      userUniqueId = await Application.androidId;
+    }
+
+    console.log(userUniqueId);
+    firebase_db
+      .ref("/like/" + userUniqueId + "/" + tip.idx)
+      .set(tip, function (error) {
+        console.log(error);
+        Alert.alert("찜 완료!");
+      });
   };
 
   const share = () => {
@@ -48,7 +73,6 @@ export default function DetailPage({ navigation, route }) {
   const link = () => {
     Linking.openURL("https://naver.com");
   };
-
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.image} source={{ uri: tip.image }} />
@@ -56,7 +80,7 @@ export default function DetailPage({ navigation, route }) {
         <Text style={styles.title}>{tip.title}</Text>
         <Text style={styles.desc}>{tip.desc}</Text>
         <View style={styles.buttonGroup}>
-          <TouchableOpacity style={styles.button} onPress={() => popup()}>
+          <TouchableOpacity style={styles.button} onPress={() => like()}>
             <Text style={styles.buttonText}>팁 찜하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => share()}>
