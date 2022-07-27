@@ -17,6 +17,7 @@ import Loading from "../components/Loading";
 import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
 import axios from "axios";
+import { firebase_db } from "../firebaseConfig";
 
 export default function MainPage({ navigation, route }) {
   const [state, setState] = useState([]);
@@ -32,12 +33,16 @@ export default function MainPage({ navigation, route }) {
       title: "보윤이의 꿀팁",
     });
 
-    setTimeout(() => {
-      getLocation();
-      setState(data.tip);
-      setCategoryState(data.tip);
-      setReady(false);
-    }, 1000);
+    firebase_db
+      .ref("/tip")
+      .once("value")
+      .then((snapshot) => {
+        let tip = snapshot.val();
+        getLocation();
+        setState(tip);
+        setCategoryState(tip);
+        setReady(false);
+      });
   }, []);
 
   const getLocation = async () => {
@@ -72,9 +77,6 @@ export default function MainPage({ navigation, route }) {
       );
     }
   };
-
-  let todayWeather = 10 + 17;
-  let todayCondition = "흐림";
   return ready ? (
     <Loading />
   ) : (
