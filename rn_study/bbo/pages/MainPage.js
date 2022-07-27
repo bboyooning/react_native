@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 
 const main =
@@ -14,10 +15,16 @@ import data from "../data.json";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
 import { StatusBar } from "expo-status-bar";
+import * as Location from "expo-location";
+import axios from "axios";
 
 export default function MainPage({ navigation, route }) {
   const [state, setState] = useState([]);
   const [categoryState, setCategoryState] = useState([]);
+  const [weather, setWeather] = useState({
+    temp: 0,
+    condition: "",
+  });
   const [ready, setReady] = useState(true);
 
   useEffect(() => {
@@ -26,11 +33,33 @@ export default function MainPage({ navigation, route }) {
     });
 
     setTimeout(() => {
+      getLocation();
       setState(data.tip);
       setCategoryState(data.tip);
       setReady(false);
     }, 1000);
   }, []);
+
+  const getLocation = async () => {
+    try {
+      await Location.requestForegroundPermissionsAsync();
+      const locationData = await Location.getCurrentPositionAsync();
+      const latitude = locationData["coords"]["latitude"];
+      const longitude = locationData["coords"]["longitude"];
+      const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
+      const result = await axios.get(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+      );
+      const temp = result.data.main.temp;
+      const condition = result.data.weather[0].main;
+      setWeather({
+        temp,
+        condition,
+      });
+    } catch (error) {
+      Alert.alert("위치를 찾을 수 없습니다.", "앱을 재실행 해주세요!");
+    }
+  };
 
   const category = (cate) => {
     if (cate == "전체보기") {
@@ -51,9 +80,8 @@ export default function MainPage({ navigation, route }) {
   ) : (
     <ScrollView style={styles.container}>
       <StatusBar style="light" />
-      {/* <Text style={styles.title}>보윤이의 꿀팁</Text> */}
       <Text style={styles.weather}>
-        오늘의 날씨: {todayWeather + "°C " + todayCondition}
+        오늘의 날씨: {weather.temp + "°C " + weather.condition}
       </Text>
       <TouchableOpacity
         style={styles.aboutButton}
