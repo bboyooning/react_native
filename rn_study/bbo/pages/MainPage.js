@@ -21,10 +21,11 @@ export default function MainPage({ navigation, route }) {
   const [ready, setReady] = useState(true);
 
   useEffect(() => {
+    navigation.setOptions({
+      title: "보윤이의 꿀팁",
+    });
+
     setTimeout(() => {
-      navigation.setOptions({
-        title: "보윤이의 꿀팁",
-      });
       setState(data.tip);
       setCategoryState(data.tip);
       setReady(false);
@@ -54,6 +55,14 @@ export default function MainPage({ navigation, route }) {
       <Text style={styles.weather}>
         오늘의 날씨: {todayWeather + "°C " + todayCondition}
       </Text>
+      <TouchableOpacity
+        style={styles.aboutButton}
+        onPress={() => {
+          navigation.navigate("AboutPage");
+        }}
+      >
+        <Text style={styles.aboutButtonText}>소개 페이지</Text>
+      </TouchableOpacity>
       <Image style={styles.mainImage} source={{ uri: main }} />
       <ScrollView
         style={styles.middleContainer}
@@ -123,6 +132,20 @@ const styles = StyleSheet.create({
   weather: {
     alignSelf: "flex-end",
     paddingRight: 20,
+  },
+  aboutButton: {
+    backgroundColor: "pink",
+    width: 100,
+    height: 40,
+    borderRadius: 10,
+    alignSelf: "flex-end",
+    marginRight: 20,
+    marginTop: 10,
+  },
+  aboutButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    marginTop: 10,
   },
   mainImage: {
     width: "90%",
