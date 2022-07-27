@@ -1,9 +1,42 @@
 import React from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  Alert,
+} from "react-native";
+import { firebase_db } from "../firebaseConfig";
+const isIOS = Platform.OS === "ios";
+import * as Application from "expo-application";
 
-export default function Card({ content, navigation, tip, setTip }) {
+export default function LikedCard({ content, navigation, tip, setTip }) {
   const detail = () => {
     navigation.navigate("DetailPage", { idx: content.idx });
+  };
+
+  const remove = async (cidx) => {
+    let userUniqueId;
+    if (isIOS) {
+      let iosId = await Application.getIosIdForVendorAsync();
+      userUniqueId = iosId;
+    } else {
+      userUniqueId = await Application.androidId;
+    }
+
+    console.log(userUniqueId);
+    firebase_db
+      .ref("/like/" + userUniqueId + "/" + cidx)
+      .remove()
+      .then(function () {
+        Alert.alert("찜 해제");
+        let result = tip.filter((data, i) => {
+          return data.idx !== cidx;
+        });
+        setTip(result);
+      });
   };
 
   return (
@@ -21,7 +54,10 @@ export default function Card({ content, navigation, tip, setTip }) {
           <TouchableOpacity style={styles.button} onPress={() => detail()}>
             <Text style={styles.buttonText}>자세히 보기</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => remove()}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => remove(content.idx)}
+          >
             <Text style={styles.buttonText}>찜 해제</Text>
           </TouchableOpacity>
         </View>
