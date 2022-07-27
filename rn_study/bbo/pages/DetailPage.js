@@ -10,6 +10,8 @@ import {
   Share,
 } from "react-native";
 
+import * as Linking from "expo-linking";
+
 export default function DetailPage({ navigation, route }) {
   const [tip, setTip] = useState({
     idx: 9,
@@ -42,6 +44,11 @@ export default function DetailPage({ navigation, route }) {
       message: `${tip.title} \n\n ${tip.desc} \n\n ${tip.image}`,
     });
   };
+
+  const link = () => {
+    Linking.openURL("https://naver.com");
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.image} source={{ uri: tip.image }} />
@@ -54,6 +61,9 @@ export default function DetailPage({ navigation, route }) {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => share()}>
             <Text style={styles.buttonText}>팁 공유하기</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => link()}>
+            <Text style={styles.buttonText}>외부 링크</Text>
           </TouchableOpacity>
         </View>
       </View>
