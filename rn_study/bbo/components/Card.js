@@ -1,12 +1,57 @@
-import React from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
+
+import {
+  setTestDeviceIDAsync,
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+} from "expo-ads-admob";
 
 export default function Card({ content, navigation }) {
+  useEffect(() => {
+    Platform.OS === "ios"
+      ? AdMobInterstitial.setAdUnitID("ca-app-pub-4630826977196684/2562638795")
+      : AdMobInterstitial.setAdUnitID("ca-app-pub-4630826977196684/5492054465");
+
+    AdMobInterstitial.addEventListener("interstitialDidLoad", () =>
+      console.log("interstitialDidLoad")
+    );
+    AdMobInterstitial.addEventListener("interstitialDidFailToLoad", () =>
+      console.log("interstitialDidFailToLoad")
+    );
+    AdMobInterstitial.addEventListener("interstitialDidOpen", () =>
+      console.log("interstitialDidOpen")
+    );
+    AdMobInterstitial.addEventListener("interstitialDidClose", () => {
+      //광고가 끝나면 다음 코드 줄이 실행!
+      console.log("interstitialDidClose");
+    });
+  }, []);
+  const goDetail = async () => {
+    try {
+      await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true });
+      await AdMobInterstitial.showAdAsync();
+      await navigation.navigate("DetailPage", { idx: content.idx });
+    } catch (error) {
+      console.log(error);
+      await navigation.navigate("DetailPage", { idx: content.idx });
+    }
+  };
+
   return (
     <TouchableOpacity
       style={styles.card}
       onPress={() => {
-        navigation.navigate("DetailPage", { idx: content.idx });
+        goDetail();
       }}
     >
       <Image style={styles.cardImage} source={{ uri: content.image }} />

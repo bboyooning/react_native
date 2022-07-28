@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  Platform,
 } from "react-native";
 
 const main =
@@ -18,6 +19,13 @@ import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
 import axios from "axios";
 import { firebase_db } from "../firebaseConfig";
+import {
+  setTestDeviceIDAsync,
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+} from "expo-ads-admob";
 
 export default function MainPage({ navigation, route }) {
   const [state, setState] = useState([]);
@@ -33,16 +41,18 @@ export default function MainPage({ navigation, route }) {
       title: "보윤이의 꿀팁",
     });
 
-    firebase_db
-      .ref("/tip")
-      .once("value")
-      .then((snapshot) => {
-        let tip = snapshot.val();
-        getLocation();
-        setState(tip);
-        setCategoryState(tip);
-        setReady(false);
-      });
+    setTimeout(() => {
+      firebase_db
+        .ref("/tip")
+        .once("value")
+        .then((snapshot) => {
+          let tip = snapshot.val();
+          getLocation();
+          setState(tip);
+          setCategoryState(tip);
+          setReady(false);
+        });
+    }, 1000);
   }, []);
 
   const getLocation = async () => {
@@ -145,6 +155,22 @@ export default function MainPage({ navigation, route }) {
           return <Card content={content} key={i} navigation={navigation} />;
         })}
       </View>
+
+      {Platform.OS === "ios" ? (
+        <AdMobBanner
+          bannerSize="fullBanner"
+          servePersonalizedAds={true}
+          adUnitID="ca-app-pub-4630826977196684/4054849711"
+          style={styles.banner}
+        />
+      ) : (
+        <AdMobBanner
+          bannerSize="fullBanner"
+          servePersonalizedAds={true}
+          adUnitID="ca-app-pub-4630826977196684/3030592401"
+          style={styles.banner}
+        />
+      )}
     </ScrollView>
   );
 }
@@ -244,5 +270,9 @@ const styles = StyleSheet.create({
   cardContainer: {
     marginTop: 10,
     marginLeft: 10,
+  },
+  banner: {
+    width: "100%",
+    height: 100,
   },
 });
