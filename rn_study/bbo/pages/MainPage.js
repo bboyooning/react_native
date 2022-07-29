@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 const main =
-  "https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";
+  "https://bboyooning.github.io/static/cf31bb58d7d32cf68d769e4e00754e91/30053/boyoon.webp";
 import data from "../data.json";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
@@ -43,7 +43,7 @@ export default function MainPage({ navigation, route }) {
 
     setTimeout(() => {
       firebase_db
-        .ref("/tip")
+        .ref("/blog")
         .once("value")
         .then((snapshot) => {
           let tip = snapshot.val();
@@ -77,7 +77,7 @@ export default function MainPage({ navigation, route }) {
   };
 
   const category = (cate) => {
-    if (cate == "전체보기") {
+    if (cate == "전체 보기") {
       setCategoryState(state);
     } else {
       setCategoryState(
@@ -101,7 +101,7 @@ export default function MainPage({ navigation, route }) {
           navigation.navigate("AboutPage");
         }}
       >
-        <Text style={styles.aboutButtonText}>소개 페이지</Text>
+        <Text style={styles.aboutButtonText}>블로그 소개</Text>
       </TouchableOpacity>
       <Image style={styles.mainImage} source={{ uri: main }} />
       <ScrollView
@@ -112,15 +112,15 @@ export default function MainPage({ navigation, route }) {
         <TouchableOpacity
           style={styles.middleButtonAll}
           onPress={() => {
-            category("전체보기");
+            category("전체 보기");
           }}
         >
-          <Text style={styles.middleButtonTextAll}>전체보기</Text>
+          <Text style={styles.middleButtonTextAll}>전체 보기</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.middleButton01}
           onPress={() => {
-            category("생활");
+            category("Javascript");
           }}
         >
           <Text style={styles.middleButtonText}>JavaScript</Text>
@@ -128,7 +128,7 @@ export default function MainPage({ navigation, route }) {
         <TouchableOpacity
           style={styles.middleButton02}
           onPress={() => {
-            category("재테크");
+            category("React");
           }}
         >
           <Text style={styles.middleButtonText}>React</Text>
@@ -136,7 +136,7 @@ export default function MainPage({ navigation, route }) {
         <TouchableOpacity
           style={styles.middleButton03}
           onPress={() => {
-            category("반려견");
+            category("React Native");
           }}
         >
           <Text style={styles.middleButtonText}>React Native</Text>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   aboutButton: {
-    backgroundColor: "pink",
+    backgroundColor: "orange",
     width: 100,
     height: 40,
     borderRadius: 10,
@@ -219,16 +219,16 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50,
     padding: 15,
-    backgroundColor: "#20b2aa",
+    backgroundColor: "#007ACC",
     borderColor: "deeppink",
     borderRadius: 15,
     margin: 7,
   },
   middleButton01: {
-    width: 100,
+    width: 120,
     height: 50,
     padding: 15,
-    backgroundColor: "#fdc453",
+    backgroundColor: "#F7DF1E",
     borderColor: "deeppink",
     borderRadius: 15,
     margin: 7,
@@ -237,15 +237,15 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50,
     padding: 15,
-    backgroundColor: "#fe8d6f",
+    backgroundColor: "#61DAFB",
     borderRadius: 15,
     margin: 7,
   },
   middleButton03: {
-    width: 100,
+    width: 130,
     height: 50,
     padding: 15,
-    backgroundColor: "#9adbc5",
+    backgroundColor: "#0088CC",
     borderRadius: 15,
     margin: 7,
   },
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50,
     padding: 15,
-    backgroundColor: "#f886a8",
+    backgroundColor: "#E34F26",
     borderRadius: 15,
     margin: 7,
   },

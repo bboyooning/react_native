@@ -31,7 +31,7 @@ export default function LikedCard({ content, navigation, tip, setTip }) {
       .ref("/like/" + userUniqueId + "/" + cidx)
       .remove()
       .then(function () {
-        Alert.alert("찜 해제");
+        Alert.alert("좋아요 해제");
         let result = tip.filter((data, i) => {
           return data.idx !== cidx;
         });

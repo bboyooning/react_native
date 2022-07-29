@@ -5,7 +5,7 @@ import * as Linking from "expo-linking";
 
 export default function AboutPage({ navigation, route }) {
   const aboutImg =
-    "https://firebasestorage.googleapis.com/v0/b/sparta-image.appspot.com/o/lecture%2FaboutImage.png?alt=media&token=13e1c4f6-b802-4975-9773-e305fc7475c4";
+    "https://images.velog.io/images/ewan/post/a698a820-6b06-43b8-929a-b2710995ffb1/react%20native.png";
 
   useEffect(() => {
     navigation.setOptions({
@@ -32,12 +32,10 @@ export default function AboutPage({ navigation, route }) {
           source={{ uri: aboutImg }}
           resizeMode={"cover"}
         />
-        <Text style={styles.desc01}>
-          리액트 네이티브로 만들어 보았습니다. 어떤가요?
-        </Text>
-        <Text style={styles.desc02}>여러분들도 한번 도전해보세요!</Text>
+        <Text style={styles.desc01}>리액트 네이티브로 만든 기술 블로그</Text>
+        <Text style={styles.desc02}>Github 에서 확인해보세요!</Text>
         <TouchableOpacity style={styles.button} onPress={() => link()}>
-          <Text style={styles.buttonText}>도전 해보기</Text>
+          <Text style={styles.buttonText}>Github 가기</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -73,12 +71,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   desc01: {
+    marginTop: 20,
     fontSize: 17,
     fontWeight: "700",
     textAlign: "center",
   },
   desc02: {
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 15,
     fontWeight: "500",
     textAlign: "center",

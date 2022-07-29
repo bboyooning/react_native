@@ -17,12 +17,12 @@ const isIOS = Platform.OS === "ios";
 
 export default function DetailPage({ navigation, route }) {
   const [tip, setTip] = useState({
-    idx: 9,
-    category: "재테크",
-    title: "렌탈 서비스 금액 비교해보기",
+    idx: 4,
+    category: "Javascript",
+    title: "Deep Dive 36. 디스트럭처링 할당",
     image:
-      "https://storage.googleapis.com/sparta-image.appspot.com/lecture/money1.png",
-    desc: "요즘은 정수기, 공기 청정기, 자동차나 장난감 등 다양한 대여서비스가 활발합니다. 사는 것보다 경제적이라고 생각해 렌탈 서비스를 이용하는 분들이 늘어나고 있는데요. 다만, 이런 렌탈 서비스 이용이 하나둘 늘어나다 보면 그 금액은 겉잡을 수 없이 불어나게 됩니다. 특히, 렌탈 서비스는 빌려주는 물건의 관리비용까지 포함된 것이기에 생각만큼 저렴하지 않습니다. 직접 관리하며 사용할 수 있는 물건이 있는지 살펴보고, 렌탈 서비스 항목에서 제외해보세요. 렌탈 비용과 구매 비용, 관리 비용을 여러모로 비교해보고 고민해보는 것이 좋습니다. ",
+      "https://bboyooning.github.io/static/ebf2585b8e228144d6853f854b8e9e39/30053/deep_dive.webp",
+    desc: "디스트럭처링 할당",
     date: "2022.07.22",
   });
 
@@ -38,7 +38,7 @@ export default function DetailPage({ navigation, route }) {
 
     const { idx } = route.params;
     firebase_db
-      .ref("/tip/" + idx)
+      .ref("/blog/" + idx)
       .once("value")
       .then((snapshot) => {
         let tip = snapshot.val();
@@ -60,7 +60,7 @@ export default function DetailPage({ navigation, route }) {
       .ref("/like/" + userUniqueId + "/" + tip.idx)
       .set(tip, function (error) {
         console.log(error);
-        Alert.alert("찜 완료!");
+        Alert.alert("좋아요 탭에서 확인해보세요!");
       });
   };
 
@@ -71,7 +71,7 @@ export default function DetailPage({ navigation, route }) {
   };
 
   const link = () => {
-    Linking.openURL("https://naver.com");
+    Linking.openURL("https://bboyooning.github.io/");
   };
   return (
     <ScrollView style={styles.container}>
@@ -81,10 +81,10 @@ export default function DetailPage({ navigation, route }) {
         <Text style={styles.desc}>{tip.desc}</Text>
         <View style={styles.buttonGroup}>
           <TouchableOpacity style={styles.button} onPress={() => like()}>
-            <Text style={styles.buttonText}>팁 찜하기</Text>
+            <Text style={styles.buttonText}>좋아요</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => share()}>
-            <Text style={styles.buttonText}>팁 공유하기</Text>
+            <Text style={styles.buttonText}>공유하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={() => link()}>
             <Text style={styles.buttonText}>외부 링크</Text>
@@ -118,6 +118,8 @@ const styles = StyleSheet.create({
   desc: {
     marginTop: 10,
     color: "#eee",
+    padding: 10,
+    lineHeight: 20,
   },
   buttonGroup: {
     flexDirection: "row",
