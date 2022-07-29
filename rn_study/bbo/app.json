@@ -28,7 +28,8 @@
       "versionCode": 1,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-4630826977196684/3030592401"
-      }
+      },
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

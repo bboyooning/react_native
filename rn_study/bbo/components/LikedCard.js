@@ -58,7 +58,7 @@ export default function LikedCard({ content, navigation, tip, setTip }) {
             style={styles.button}
             onPress={() => remove(content.idx)}
           >
-            <Text style={styles.buttonText}>찜 해제</Text>
+            <Text style={styles.buttonText}>좋아요 해제</Text>
           </TouchableOpacity>
         </View>
       </View>

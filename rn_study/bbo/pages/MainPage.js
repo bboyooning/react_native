@@ -38,7 +38,7 @@ export default function MainPage({ navigation, route }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: "보윤이의 꿀팁",
+      title: "보윤이의 기술 블로그",
     });
 
     setTimeout(() => {
@@ -123,7 +123,7 @@ export default function MainPage({ navigation, route }) {
             category("생활");
           }}
         >
-          <Text style={styles.middleButtonText}>생활</Text>
+          <Text style={styles.middleButtonText}>JavaScript</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.middleButton02}
@@ -131,7 +131,7 @@ export default function MainPage({ navigation, route }) {
             category("재테크");
           }}
         >
-          <Text style={styles.middleButtonText}>재테크</Text>
+          <Text style={styles.middleButtonText}>React</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.middleButton03}
@@ -139,7 +139,7 @@ export default function MainPage({ navigation, route }) {
             category("반려견");
           }}
         >
-          <Text style={styles.middleButtonText}>반려견</Text>
+          <Text style={styles.middleButtonText}>React Native</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.middleButton04}
@@ -147,7 +147,7 @@ export default function MainPage({ navigation, route }) {
             navigation.navigate("LikedPage");
           }}
         >
-          <Text style={styles.middleButtonText}>꿀팁 찜</Text>
+          <Text style={styles.middleButtonText}>좋아요</Text>
         </TouchableOpacity>
       </ScrollView>
       <View style={styles.cardContainer}>

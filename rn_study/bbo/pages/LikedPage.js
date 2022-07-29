@@ -11,7 +11,7 @@ export default function LikedPage({ navigation, route }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: "꿀팁 찜",
+      title: "좋아요",
     });
     getLiked();
   }, []);
