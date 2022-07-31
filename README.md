@@ -1,3 +1,3 @@
-# react_native
+# react-native-expo
 
-리액트 네이티브로 앱 만들어보기
+React Native Expo 를 이용한 앱 만들기
