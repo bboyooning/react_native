@@ -18,13 +18,13 @@
     "ios": {
       "supportsTablet": true,
       "buildNumber": "1.0.0",
-      "bundleIdentifier": "com.bbo",
+      "bundleIdentifier": "com.bboyooning",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-4630826977196684/4054849711"
       }
     },
     "android": {
-      "package": "com.bbo",
+      "package": "com.bboyooning",
       "versionCode": 1,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-4630826977196684/3030592401"
